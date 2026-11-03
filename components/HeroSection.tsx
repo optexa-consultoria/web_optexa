@@ -130,7 +130,7 @@ export default function HeroSection() {
             <motion.div variants={fadeUp}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F05941]/10 border border-[#F05941]/25 text-[#F05941] text-sm font-semibold tracking-wide uppercase">
                 <Zap size={13} />
-                Consultoría Boutique B2B
+                Consultoría en procesos · Cauca
               </span>
             </motion.div>
 
@@ -139,12 +139,10 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-5xl md:text-6xl xl:text-7xl font-black leading-[1.0] tracking-tight text-white"
             >
-              Tu operación<br />
-              tiene{" "}
-              <span className="text-gradient">fricción.</span>
-              <br />
-              Nosotros la<br />
-              <span className="text-gradient">eliminamos.</span>
+              Optimizamos{" "}
+              <span className="text-gradient">procesos</span>,<br />
+              transformamos{" "}
+              <span className="text-gradient">negocios.</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -152,8 +150,10 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-lg md:text-xl text-white/60 leading-relaxed max-w-xl"
             >
-              Reingeniería de procesos, automatización inteligente y datos en
-              tiempo real. Metodología Scrum. ROI medible desde el sprint 1.
+              Ayudamos a emprendedores y pequeños negocios a organizar y conectar
+              la información de sus productos, clientes y ventas, con herramientas
+              digitales accesibles. Menos tiempo en tareas operativas, más tiempo
+              para hacer crecer tu negocio.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -166,12 +166,12 @@ export default function HeroSection() {
                 onClick={handleDiagnostico}
                 className="btn-primary text-base px-7 py-3.5"
               >
-                Diagnóstico gratis
+                Evalúa tu negocio gratis
                 <ArrowRight size={18} />
               </a>
-              <a href="#casos" className="btn-outline text-base px-7 py-3.5">
+              <a href="#metodo" className="btn-outline text-base px-7 py-3.5">
                 <Play size={16} />
-                Ver casos de éxito
+                Cómo trabajamos
               </a>
             </motion.div>
 
@@ -181,9 +181,9 @@ export default function HeroSection() {
               className="flex gap-8 mt-4 pt-6 border-t border-white/10"
             >
               {[
-                { value: "+40", label: "Procesos optimizados" },
-                { value: "65%", label: "Reducción de tiempos promedio" },
-                { value: "3x", label: "ROI típico en 6 meses" },
+                { value: "Primero", label: "entendemos tu negocio" },
+                { value: "Accesible", label: "herramientas a tu medida" },
+                { value: "Contigo", label: "acompañamiento real" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-0.5">
                   <span className="text-2xl font-black text-[#F05941]">
@@ -212,23 +212,23 @@ export default function HeroSection() {
                     <Zap size={20} className="text-white" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">Engineer the Flow</p>
-                    <p className="text-white/40 text-xs">Optexa · Diagnóstico activo</p>
+                    <p className="text-white font-bold text-sm">Método Optexa</p>
+                    <p className="text-white/40 text-xs">Engineer the flow</p>
                   </div>
                 </div>
 
                 {/* Flow diagram */}
                 <div className="space-y-3">
                   {[
-                    { label: "Mapeo de procesos", pct: 100, color: "#F05941" },
-                    { label: "Identificación de cuellos de botella", pct: 85, color: "#BE3144" },
-                    { label: "Automatización de flujos", pct: 70, color: "#872341" },
-                    { label: "Datos en tiempo real", pct: 55, color: "#F05941" },
+                    { label: "1. Conocer", pct: 100, color: "#F05941" },
+                    { label: "2. Diagnosticar", pct: 80, color: "#BE3144" },
+                    { label: "3. Diseñar", pct: 60, color: "#872341" },
+                    { label: "4. Implementar", pct: 40, color: "#F05941" },
+                    { label: "5. Evolucionar", pct: 20, color: "#BE3144" },
                   ].map((item) => (
                     <div key={item.label}>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-white/60">{item.label}</span>
-                        <span className="text-white/40">{item.pct}%</span>
                       </div>
                       <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
                         <motion.div
@@ -245,10 +245,10 @@ export default function HeroSection() {
 
                 <div className="mt-6 p-4 rounded-2xl bg-[#F05941]/10 border border-[#F05941]/20">
                   <p className="text-[#F05941] font-bold text-sm">
-                    Fricción operativa detectada
+                    No implementamos sin entender
                   </p>
                   <p className="text-white/50 text-xs mt-0.5">
-                    3 procesos críticos listos para optimizar
+                    Cinco etapas para transformar tu negocio
                   </p>
                 </div>
               </div>
@@ -259,8 +259,8 @@ export default function HeroSection() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-5 -right-5 bg-gradient-to-br from-[#F05941] to-[#BE3144] rounded-2xl px-4 py-3 shadow-xl shadow-[#F05941]/30"
               >
-                <p className="text-white text-xs font-bold">ROI</p>
-                <p className="text-white text-2xl font-black leading-none">3x</p>
+                <p className="text-white text-xs font-bold">Basado en</p>
+                <p className="text-white text-2xl font-black leading-none">PHVA</p>
               </motion.div>
             </div>
           </motion.div>

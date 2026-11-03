@@ -2,63 +2,62 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { waLink } from "@/lib/site";
 import { ChevronRight, ChevronLeft, CheckCircle, BookOpen, MessageCircle, RotateCcw } from "lucide-react";
-
-const WHATSAPP_NUMBER = "521XXXXXXXXXX"; // Replace with real number
 
 const questions = [
   {
     id: 1,
-    question: "¿Cómo describirías la previsibilidad de tus tiempos de entrega o producción?",
+    question: "¿Dónde guardas hoy la información de tus productos, clientes y ventas?",
     options: [
-      { text: "Muy baja: los retrasos son la norma y nadie los predice", score: 3 },
-      { text: "Media: hay variación pero parcialmente controlada", score: 2 },
-      { text: "Alta: los plazos se cumplen con consistencia", score: 1 },
+      { text: "En cuadernos, chats y en mi memoria", score: 3 },
+      { text: "En algunas hojas de cálculo, pero separadas o desordenadas", score: 2 },
+      { text: "En un solo lugar organizado y actualizado", score: 1 },
     ],
   },
   {
     id: 2,
-    question: "¿Cuánto tiempo dedica tu equipo a tareas repetitivas y manuales (copiar datos, reportes, validaciones)?",
+    question: "Cuando un cliente pregunta por un producto, ¿qué tan rápido sabes si hay existencias y a qué precio?",
     options: [
-      { text: "Más del 40% de su jornada semanal", score: 3 },
-      { text: "Entre el 20% y 40%", score: 2 },
-      { text: "Menos del 20%, el resto es trabajo de valor", score: 1 },
+      { text: "Tengo que buscar o contar; a veces me equivoco", score: 3 },
+      { text: "Lo sé, pero me toma un rato confirmarlo", score: 2 },
+      { text: "Lo sé al instante", score: 1 },
     ],
   },
   {
     id: 3,
-    question: "¿Cómo toma decisiones clave tu dirección hoy?",
+    question: "¿Cómo llevas el control de pedidos que llegan por WhatsApp, Instagram u otros canales?",
     options: [
-      { text: "Por instinto o experiencia, sin datos confiables en tiempo real", score: 3 },
-      { text: "Con reportes periódicos que llegan con días de retraso", score: 2 },
-      { text: "Con dashboards en tiempo real y KPIs bien definidos", score: 1 },
+      { text: "Se quedan en los chats y a veces se me pierden", score: 3 },
+      { text: "Los anoto, pero sin un seguimiento claro", score: 2 },
+      { text: "Tengo un registro con el estado de cada pedido", score: 1 },
     ],
   },
   {
     id: 4,
-    question: "¿Qué tan integradas están tus áreas operativas (ventas, ops, finanzas, logística)?",
+    question: "¿Sabes cuánto vendiste y cuánto ganaste el mes pasado?",
     options: [
-      { text: "Trabajan en silos: poca comunicación y datos inconsistentes entre áreas", score: 3 },
-      { text: "Hay integración parcial, pero existen brechas importantes", score: 2 },
-      { text: "Alta integración: todas las áreas comparten datos y flujos en tiempo real", score: 1 },
+      { text: "No, lo calculo más o menos", score: 3 },
+      { text: "Sí, pero tengo que sacar cuentas a mano", score: 2 },
+      { text: "Sí, lo veo en un reporte o tablero", score: 1 },
     ],
   },
   {
     id: 5,
-    question: "¿Cuál es el nivel de rework (reproceso o corrección de errores) en tus operaciones?",
+    question: "¿Cuánto tiempo dedicas a la semana a tareas repetitivas (copiar datos, sacar cuentas, responder lo mismo)?",
     options: [
-      { text: "Alto: gastamos mucho tiempo corrigiendo errores recurrentes", score: 3 },
-      { text: "Moderado: sucede, pero no es crítico aún", score: 2 },
-      { text: "Bajo: los procesos tienen controles de calidad sólidos", score: 1 },
+      { text: "Más de 5 horas", score: 3 },
+      { text: "Entre 2 y 5 horas", score: 2 },
+      { text: "Menos de 2 horas", score: 1 },
     ],
   },
   {
     id: 6,
-    question: "Si duplicaras tu volumen de operaciones mañana, ¿qué pasaría?",
+    question: "Si mañana tus ventas se duplicaran, ¿qué pasaría?",
     options: [
-      { text: "Colapsaríamos: nuestros procesos no escalan sin sumar personas o caos", score: 3 },
-      { text: "Tendríamos problemas serios pero sobreviviríamos con esfuerzo extra", score: 2 },
-      { text: "Escalaríamos sin mayor problema: tenemos sistemas y procesos para ello", score: 1 },
+      { text: "No daría abasto: todo depende de mí y de hacerlo a mano", score: 3 },
+      { text: "Lo lograría, pero con mucho esfuerzo extra", score: 2 },
+      { text: "Estoy preparado: tengo procesos y herramientas para crecer", score: 1 },
     ],
   },
 ];
@@ -78,13 +77,11 @@ export default function SurveySection() {
   const scoreRatio = totalScore / MAX_SCORE;
   const isHighFriction = scoreRatio >= HIGH_THRESHOLD;
 
-  const waTextHigh = encodeURIComponent(
-    `Hola Optexa! 👋 Completé el diagnóstico de fricción operativa y obtuve un puntaje alto (${totalScore}/${MAX_SCORE}). Me gustaría agendar una sesión para explorar cómo pueden ayudarnos. ¿Cuándo tienen disponibilidad?`
+  const waHref = waLink(
+    isHighFriction
+      ? `Hola Optexa 👋 Hice la evaluación de la web y obtuve ${totalScore}/${MAX_SCORE}. Me gustaría agendar un Diagnóstico Express para mi negocio.`
+      : `Hola Optexa 👋 Hice la evaluación de la web y obtuve ${totalScore}/${MAX_SCORE}. Me gustaría recibir recomendaciones para seguir mejorando mi negocio.`
   );
-  const waTextLow = encodeURIComponent(
-    `Hola Optexa! Completé el diagnóstico y me gustaría recibir la guía gratuita de optimización de procesos. Mi puntaje fue ${totalScore}/${MAX_SCORE}.`
-  );
-  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${isHighFriction ? waTextHigh : waTextLow}`;
 
   const handleStart = () => { setDirection(1); setStep(1); };
 
@@ -131,14 +128,14 @@ export default function SurveySection() {
           className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-[#F05941]/10 border border-[#F05941]/30 text-[#F05941] text-sm font-semibold tracking-wide uppercase mb-4">
-            Diagnóstico Gratuito
+            Evaluación gratuita
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#22092C] leading-tight">
-            ¿Cuánta fricción tiene<br className="hidden md:block" />
-            tu operación?
+            ¿Qué tan organizado<br className="hidden md:block" />
+            está tu negocio?
           </h2>
           <p className="mt-4 text-lg text-[#22092C]/55 max-w-xl mx-auto leading-relaxed">
-            6 preguntas. 3 minutos. Un diagnóstico honesto del estado de tu operación.
+            6 preguntas, 3 minutos. Una mirada rápida y honesta a cómo funciona hoy tu negocio.
           </p>
         </motion.div>
 
@@ -178,11 +175,11 @@ export default function SurveySection() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-3">
-                      Diagnóstico de Fricción Operativa
+                      Evaluación de orden y control
                     </h3>
                     <p className="text-white/55 leading-relaxed max-w-md mx-auto">
-                      Responde 6 preguntas sobre tu operación actual. Al final, recibirás
-                      una valoración personalizada y acceso a una consulta estratégica con nuestro equipo.
+                      Responde 6 preguntas sobre tu negocio. Al final verás tu resultado y
+                      podrás escribirnos por WhatsApp para conversar sobre los siguientes pasos.
                     </p>
                   </div>
                   <button
@@ -190,7 +187,7 @@ export default function SurveySection() {
                     onClick={handleStart}
                     className="btn-primary text-base px-8 py-3.5 mt-2"
                   >
-                    Comenzar diagnóstico
+                    Comenzar evaluación
                     <ChevronRight size={18} />
                   </button>
                 </motion.div>
@@ -290,24 +287,24 @@ export default function SurveySection() {
                           {totalScore}/{MAX_SCORE}
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3">
-                          Alta fricción operativa detectada
+                          Tu negocio tiene mucho por ganar
                         </h3>
                         <p className="text-white/55 leading-relaxed max-w-md mx-auto">
-                          Tu operación tiene un potencial de mejora significativo. 
-                          Nuestro equipo puede identificar rápidamente dónde están los 
-                          cuellos de botella y diseñar un plan de acción en 2 semanas.
+                          Hay varias tareas que hoy te quitan tiempo y se pueden ordenar o
+                          simplificar. El siguiente paso es un Diagnóstico Express para
+                          conocer tu operación y priorizar las mejoras.
                         </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3 mt-2">
                         <a
                           id="survey-wa-high-cta"
-                          href={waLink}
+                          href={waHref}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn-primary text-base px-7 py-3.5"
                         >
                           <MessageCircle size={18} />
-                          Agendar sesión estratégica
+                          Agendar Diagnóstico Express
                         </a>
                         <button onClick={handleReset} className="btn-outline px-5 py-3.5 text-sm">
                           <RotateCcw size={15} />
@@ -325,24 +322,24 @@ export default function SurveySection() {
                           {totalScore}/{MAX_SCORE}
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3">
-                          Fricción moderada detectada
+                          Vas por buen camino
                         </h3>
                         <p className="text-white/55 leading-relaxed max-w-md mx-auto">
-                          Tu operación muestra señales de mejora pero aún no está en zona crítica.
-                          Te enviamos una guía gratuita con los 5 pilares de optimización 
-                          que más impacto tienen en empresas como la tuya.
+                          Tu negocio ya tiene una base de orden. Aun así, siempre hay
+                          oportunidades para conectar mejor la información y ahorrar tiempo.
+                          Escríbenos y te contamos por dónde empezar.
                         </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3 mt-2">
                         <a
                           id="survey-wa-low-cta"
-                          href={waLink}
+                          href={waHref}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn-primary text-base px-7 py-3.5"
                         >
                           <MessageCircle size={18} />
-                          Recibir guía gratuita
+                          Hablar con Optexa
                         </a>
                         <button onClick={handleReset} className="btn-outline px-5 py-3.5 text-sm">
                           <RotateCcw size={15} />

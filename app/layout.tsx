@@ -10,17 +10,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Optexa Consultoría | Engineer the Flow",
+  title: "Optexa Consultoría | Optimizamos procesos, transformamos negocios",
   description:
-    "Optexa es una consultoría boutique B2B especializada en reingeniería de procesos y automatización industrial. Eliminamos la fricción operativa y aceleramos tus resultados con metodología Scrum y datos en tiempo real.",
+    "Consultoría en optimización de procesos y transformación digital para emprendedores y pequeños negocios del Cauca. Organizamos y conectamos la información de tus productos, clientes y ventas con herramientas accesibles.",
   keywords:
-    "reingeniería de procesos, automatización industrial, consultoría B2B, Scrum, Python, Looker, optimización operativa",
+    "optimización de procesos, transformación digital, emprendedores, pequeños negocios, Popayán, Timbío, Cauca, Google Sheets, catálogo digital, control de ventas, inventario",
   openGraph: {
-    title: "Optexa | Engineer the Flow",
+    title: "Optexa | Optimizamos procesos, transformamos negocios",
     description:
-      "Tu operación tiene fricción. Nosotros la eliminamos. Consultoría boutique en reingeniería de procesos y automatización.",
+      "Ayudamos a emprendedores y pequeños negocios a organizar sus productos, clientes y ventas con herramientas digitales accesibles.",
     type: "website",
-    locale: "es_MX",
+    locale: "es_CO",
   },
 };
 

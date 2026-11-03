@@ -1,38 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, Clock, BarChart2, GitMerge, Users, TrendingDown } from "lucide-react";
+import { FolderOpen, Link2, MessageCircle, BarChart2, Repeat, Package } from "lucide-react";
 
 const painPoints = [
   {
-    icon: Clock,
-    title: "Procesos lentos e impredecibles",
-    desc: "Los tiempos de ciclo se alargan sin control. Los equipos no saben cuánto tardará cada tarea, generando retrasos en cascada y clientes frustrados.",
+    icon: FolderOpen,
+    title: "Información dispersa",
+    desc: "Productos en un cuaderno, clientes en el celular, ventas en chats. Encontrar un dato toma más tiempo del que debería.",
   },
   {
-    icon: AlertTriangle,
-    title: "Errores operativos recurrentes",
-    desc: "El mismo error aparece una y otra vez. Sin un sistema robusto de control, el rework consume hasta el 30% de la capacidad productiva.",
+    icon: Link2,
+    title: "Nada está conectado",
+    desc: "Lo que vendes no se cruza con tu inventario ni con tus clientes. Cada registro se hace a mano y por separado.",
+  },
+  {
+    icon: Package,
+    title: "Catálogo desactualizado",
+    desc: "Precios, tallas y existencias cambian, pero el catálogo que envías por WhatsApp o Instagram no se actualiza a tiempo.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Pedidos y atención en desorden",
+    desc: "Los pedidos llegan por varios canales y se pierden entre mensajes. Hacer seguimiento a cada cliente depende de tu memoria.",
   },
   {
     icon: BarChart2,
-    title: "Datos sin contexto ni acción",
-    desc: "Tienes datos en hojas de cálculo que nadie interpreta. Las decisiones se toman por intuición, no por evidencia. El costo oculto es enorme.",
+    title: "No sabes cuánto ganas",
+    desc: "Sin un tablero sencillo es difícil ver ventas, ganancias y pérdidas. Las decisiones se toman por intuición.",
   },
   {
-    icon: GitMerge,
-    title: "Silos entre departamentos",
-    desc: "Ventas no habla con operaciones. Finanzas trabaja con información desactualizada. La fricción entre áreas bloquea el flujo completo del negocio.",
-  },
-  {
-    icon: Users,
-    title: "Talento atrapado en tareas manuales",
-    desc: "Tu equipo más valioso dedica horas a copiar, pegar y reportar. Ese tiempo se puede automatizar y redirigir a trabajo de alto impacto.",
-  },
-  {
-    icon: TrendingDown,
-    title: "Márgenes que se comprimen con el volumen",
-    desc: "Al crecer, los costos crecen más rápido que los ingresos. Sin procesos escalables, el éxito se convierte en la mayor amenaza para la rentabilidad.",
+    icon: Repeat,
+    title: "Tareas que se repiten todos los días",
+    desc: "Copiar datos, sacar cuentas y armar reportes a mano. Son horas que podrías dedicar a vender y crecer.",
   },
 ];
 
@@ -59,15 +59,16 @@ export default function ProblemSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-[#F05941]/10 border border-[#F05941]/25 text-[#F05941] text-sm font-semibold tracking-wide uppercase mb-4">
-            El Problema
+            ¿Te pasa esto?
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#22092C] leading-tight">
-            ¿Tu empresa vive alguno<br className="hidden md:block" />
-            de estos síntomas?
+            Tu negocio crece, pero<br className="hidden md:block" />
+            el orden no lo acompaña
           </h2>
           <p className="mt-4 text-lg text-[#22092C]/55 max-w-2xl mx-auto leading-relaxed">
-            La fricción operativa se manifiesta de muchas formas. Todas tienen solución.
-            La clave está en saber dónde está el cuello de botella real.
+            Son situaciones comunes en emprendimientos y pequeños negocios que venden
+            por redes sociales. Todas se pueden mejorar, y no siempre hace falta
+            invertir en tecnología costosa.
           </p>
         </motion.div>
 

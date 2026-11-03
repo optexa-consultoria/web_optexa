@@ -1,55 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Zap, Target, BarChart3, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import { scrollTo } from "@/lib/site";
+
+const principles = [
+  "Comprender antes de proponer",
+  "Mejorar con sentido práctico",
+  "Tecnología accesible",
+  "Acompañamiento cercano",
+  "Resultados sostenibles",
+  "Trabajo honesto: solo prometemos lo que podemos cumplir",
+];
 
 export default function AboutSection() {
   return (
     <section id="nosotros" className="bg-[#22092C] section-padding">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-center">
-
-          {/* LEFT: Visual */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
+            className="relative max-w-sm mx-auto lg:mx-0 w-full"
           >
-            {/* Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#F05941]/20 to-[#872341]/10 rounded-3xl blur-2xl" />
-
-            <div className="relative glass-card rounded-3xl p-10 border border-white/10 text-center">
-              {/* Logo mark */}
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center mx-auto mb-6 shadow-xl shadow-[#F05941]/30">
-                <Zap size={38} className="text-white" />
-              </div>
-
-              <p className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">
-                opt<span className="text-[#F05941]">exa</span>
-              </p>
-
-              <p className="text-lg font-semibold text-[#F05941] mb-8 italic tracking-wide">
-                "Engineer the Flow"
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  { icon: Target, label: "Enfoque en ROI medible" },
-                  { icon: BarChart3, label: "Decisiones basadas en datos" },
-                  { icon: Zap, label: "Velocidad con metodología Scrum" },
-                ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-3 glass-card rounded-xl px-4 py-3">
-                    <Icon size={16} className="text-[#F05941] flex-shrink-0" />
-                    <span className="text-white/70 text-sm font-medium">{label}</span>
-                  </div>
-                ))}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#F05941]/25 to-[#872341]/10 rounded-3xl blur-2xl" />
+            <div className="relative rounded-3xl overflow-hidden border border-white/10">
+              <Image
+                src="/fundador.jpg"
+                alt="E. Camilo Urbano Burbano, fundador de Optexa"
+                width={640}
+                height={640}
+                className="w-full h-auto"
+              />
+              <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-[#22092C] to-transparent">
+                <p className="text-white font-bold">E. Camilo Urbano Burbano</p>
+                <p className="text-[#F05941] text-sm">Fundador · Ingeniero industrial</p>
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT: Text */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -58,57 +50,49 @@ export default function AboutSection() {
             className="flex flex-col gap-7"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#F05941]/15 border border-[#F05941]/30 text-[#F05941] text-sm font-semibold tracking-wide uppercase w-fit">
-              Sobre Optexa
+              Quién está detrás
             </span>
 
             <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
-              Ingeniería aplicada<br />
-              a la <span className="text-gradient">operación real</span>
+              Ingeniería industrial<br />
+              al servicio de <span className="text-gradient">tu negocio</span>
             </h2>
 
             <div className="space-y-5 text-white/60 leading-relaxed">
               <p className="text-lg">
-                Optexa nació de una premisa simple: las empresas pierden millones
-                en procesos que nadie cuestionó desde que se diseñaron. Somos una
-                consultoría boutique que combina rigor de ingeniería con agilidad
-                Scrum para transformar esa inercia en ventaja competitiva.
+                Soy Camilo, ingeniero industrial. En mi experiencia profesional he acompañado
+                equipos y procesos para entender cómo se hace el trabajo, encontrar maneras
+                de hacerlo mejor, reducir pasos innecesarios y evaluar qué se puede automatizar.
               </p>
               <p>
-                Trabajamos en proyectos de alto impacto donde los resultados son
-                medibles desde el primer sprint. No vendemos diagnósticos que
-                acaban en cajones: implementamos, medimos y ajustamos junto a
-                tu equipo hasta que el ROI sea evidente.
+                Lo que más me motiva es ver a las personas trabajar con menos carga y más
+                claridad. Me apasiona la tecnología y aprendo de forma continua, pero la uso
+                como un medio: primero entiendo tu negocio y luego elijo la herramienta que
+                de verdad te sirve.
               </p>
               <p>
-                Nuestro enfoque es <span className="text-white font-semibold">Engineer the Flow</span>:
-                diseñar sistemas operativos que fluyen solos, sin fricciones,
-                sin dependencias de héroes individuales y con datos que iluminan
-                las decisiones correctas en el momento correcto.
+                Creé Optexa para llevar esa forma de trabajar a emprendedores y negocios del
+                Cauca, empezando desde abajo y creciendo junto a ellos. Mi visión es construir
+                una consultora cercana, que ayude a muchos negocios a ordenarse, conectar su
+                información y evolucionar. <span className="text-white font-semibold">Engineer the flow.</span>
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-4 border-t border-white/10">
-              {[
-                { value: "100%", label: "Proyectos con ROI documentado" },
-                { value: "Sprint 1", label: "Primeros resultados visibles" },
-                { value: "B2B", label: "Solo empresas, no individuos" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-xl font-black text-[#F05941] mb-1">{stat.value}</div>
-                  <div className="text-xs text-white/40 leading-tight">{stat.label}</div>
-                </div>
+            <ul className="grid sm:grid-cols-2 gap-3 pt-4 border-t border-white/10">
+              {principles.map((p) => (
+                <li key={p} className="flex gap-2 text-sm text-white/70">
+                  <Check size={16} className="text-[#F05941] flex-shrink-0 mt-0.5" />
+                  {p}
+                </li>
               ))}
-            </div>
+            </ul>
 
             <a
               href="#diagnostico"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("diagnostico")?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={scrollTo("diagnostico")}
               className="btn-primary w-fit text-base px-7 py-3.5 mt-2"
             >
-              Iniciar diagnóstico gratuito
+              Evalúa tu negocio
               <ArrowRight size={18} />
             </a>
           </motion.div>

@@ -2,24 +2,25 @@
 
 import { motion } from "framer-motion";
 import { Zap, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { EMAIL, CITY, waLink } from "@/lib/site";
 
 const footerLinks = {
   Servicios: [
-    { label: "Reingeniería de Procesos", href: "#solucion" },
-    { label: "Automatización Inteligente", href: "#solucion" },
-    { label: "Datos para Decisiones", href: "#solucion" },
-    { label: "Diagnóstico Gratuito", href: "#diagnostico" },
+    { label: "Diagnóstico Express", href: "#servicios" },
+    { label: "Paquete Emprendedor", href: "#servicios" },
+    { label: "Negocio en Crecimiento", href: "#servicios" },
+    { label: "Negocio Inteligente", href: "#servicios" },
   ],
   Empresa: [
     { label: "Sobre Optexa", href: "#nosotros" },
-    { label: "Casos de Éxito", href: "#casos" },
-    { label: "Metodología", href: "#solucion" },
-    { label: "Redes Sociales", href: "#redes" },
+    { label: "Método Optexa", href: "#metodo" },
+    { label: "Casos", href: "#casos" },
+    { label: "Evalúa tu negocio", href: "#diagnostico" },
   ],
   Contacto: [
-    { label: "contacto@optexa.mx", href: "mailto:contacto@optexa.mx", icon: Mail },
-    { label: "Ciudad de México, MX", href: "#", icon: MapPin },
-    { label: "WhatsApp", href: "https://wa.me/521XXXXXXXXXX", icon: Zap },
+    { label: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
+    { label: CITY, href: "#", icon: MapPin },
+    { label: "WhatsApp +57 318 381 7518", href: waLink("Hola Optexa, quiero más información."), icon: Zap },
   ],
 };
 
@@ -45,11 +46,12 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-white/35 text-sm leading-relaxed max-w-xs">
-              Consultoría boutique B2B especializada en reingeniería de procesos
-              y automatización industrial. Engineer the Flow.
+              Optimizamos procesos, transformamos negocios. Consultoría en
+              optimización de procesos y transformación digital para emprendedores
+              y pequeños negocios.
             </p>
             <p className="text-[#F05941]/70 text-xs font-semibold tracking-widest uppercase italic mt-2">
-              "Engineer the Flow"
+              Engineer the flow
             </p>
           </div>
 
@@ -85,17 +87,6 @@ export default function Footer() {
           <p className="text-white/20 text-xs">
             © {new Date().getFullYear()} Optexa Consultoría. Todos los derechos reservados.
           </p>
-          <div className="flex items-center gap-6">
-            {["Privacidad", "Términos", "Cookies"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-white/20 hover:text-white/50 text-xs transition-colors"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

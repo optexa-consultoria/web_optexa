@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Zap, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "El Problema", href: "#problema" },
-  { label: "Solución", href: "#solucion" },
-  { label: "Casos de Éxito", href: "#casos" },
-  { label: "Nosotros", href: "#nosotros" },
+  { label: "Método", href: "#metodo" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Casos", href: "#casos" },
+  { label: "Quién soy", href: "#nosotros" },
 ];
 
 export default function Navbar() {
@@ -65,7 +65,7 @@ export default function Navbar() {
             className="btn-primary text-sm px-5 py-2.5"
           >
             <Zap size={15} />
-            Diagnóstico gratis
+            Evalúa tu negocio
           </a>
         </div>
 
@@ -106,7 +106,7 @@ export default function Navbar() {
                 className="btn-primary text-center justify-center mt-2"
               >
                 <Zap size={16} />
-                Diagnóstico gratis
+                Evalúa tu negocio
               </a>
             </div>
           </motion.div>
