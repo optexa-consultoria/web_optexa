@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, Menu, X } from "lucide-react";
@@ -39,12 +40,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-            <Zap size={18} className="text-white" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-white">
-            opt<span className="text-[#F05941]">exa</span>
-          </span>
+          <Image src="/logo-optexa.png" alt="Optexa" width={480} height={122} className="h-8 w-auto" priority />
         </a>
 
         {/* Desktop Nav */}

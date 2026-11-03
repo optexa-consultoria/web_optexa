@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Zap, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { EMAIL, CITY, waLink } from "@/lib/site";
@@ -38,12 +39,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="flex flex-col gap-4">
             <a href="#" className="flex items-center gap-2 w-fit">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center">
-                <Zap size={18} className="text-white" />
-              </div>
-              <span className="text-2xl font-bold text-white tracking-tight">
-                opt<span className="text-[#F05941]">exa</span>
-              </span>
+              <Image src="/logo-optexa.png" alt="Optexa" width={480} height={122} className="h-9 w-auto" />
             </a>
             <p className="text-white/35 text-sm leading-relaxed max-w-xs">
               Optimizamos procesos, transformamos negocios. Consultoría en
