@@ -130,3 +130,15 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+.lead-input {
+  width: 100%;
+  border-radius: 0.625rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.06);
+  padding: 0.65rem 0.85rem;
+  color: #fff;
+  font-size: 1rem;
+}
+.lead-input:focus { border-color: #F05941; outline: none; }
+.lead-input option { color: #22092C; }

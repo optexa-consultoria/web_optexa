@@ -10,3 +10,6 @@ export const scrollTo = (id: string) => (e: React.MouseEvent) => {
   e.preventDefault();
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
+
+// URL /exec del receptor de leads (Apps Script). Vacía = el formulario solo abre WhatsApp.
+export const LEADS_URL = process.env.NEXT_PUBLIC_LEADS_URL ?? "";

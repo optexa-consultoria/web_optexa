@@ -28,9 +28,10 @@ export default function Privacidad() {
       <h2>2. Datos que recolectamos</h2>
       <p>
         Datos de identificación y contacto (nombre, teléfono, correo, nombre del negocio, ciudad) y la
-        información que nos compartas sobre tu negocio para prestarte el servicio. La evaluación de
-        6 preguntas del sitio no guarda tus respuestas: solo se envían si decides escribirnos por
-        WhatsApp. No solicitamos datos sensibles ni datos de niños, niñas o adolescentes.
+        información que nos compartas sobre tu negocio para prestarte el servicio. Si al terminar la
+        evaluación de 6 preguntas dejas tus datos, guardamos tu nombre, WhatsApp, negocio, ciudad,
+        preferencia de reunión, tus respuestas y el resultado en una hoja de cálculo privada de
+        Optexa (Google Sheets), para contactarte y preparar el diagnóstico. No solicitamos datos sensibles ni datos de niños, niñas o adolescentes.
       </p>
       <p>
         El sitio usa Vercel Web Analytics, que mide visitas de forma agregada sin cookies de rastreo
@@ -49,7 +50,8 @@ export default function Privacidad() {
 
       <h2>4. Autorización</h2>
       <p>
-        Al escribirnos por WhatsApp o correo y entregarnos tus datos, nos autorizas de forma previa,
+        Al marcar la casilla de autorización del formulario de la web, o al escribirnos por
+        WhatsApp o correo y entregarnos tus datos, nos autorizas de forma previa,
         expresa e informada a tratarlos para las finalidades anteriores. En la contratación de
         servicios, la autorización queda incluida en el acuerdo de servicio.
       </p>

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { waLink } from "@/lib/site";
-import { ChevronRight, ChevronLeft, CheckCircle, BookOpen, MessageCircle, RotateCcw } from "lucide-react";
+import { waLink, LEADS_URL } from "@/lib/site";
+import { ChevronRight, ChevronLeft, CheckCircle, BookOpen, MessageCircle, RotateCcw, Send } from "lucide-react";
 
 const questions = [
   {
@@ -85,6 +85,29 @@ export default function SurveySection() {
       : `Hola Optexa 👋 Hice la evaluación de la web y obtuve ${totalScore}/${MAX_SCORE}. Me gustaría recibir recomendaciones para seguir mejorando mi negocio.`
   );
 
+  const [sent, setSent] = useState(false);
+  const nivel = isHighFriction ? "Mucho por ganar" : "Buen camino";
+
+  // Guarda el lead en la Hoja Maestra (si hay LEADS_URL) y abre WhatsApp con el mensaje.
+  const handleLead = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const utm = new URLSearchParams(location.search).get("utm_source");
+    const lead = {
+      ...f,
+      autoriza: f.autoriza === "on",
+      puntaje: totalScore,
+      nivel,
+      respuestas: answers.map((sc, i) => `P${i + 1}: ${questions[i].options.find((o) => o.score === sc)?.text}`).join(" | "),
+      origen: utm || (document.referrer ? new URL(document.referrer).hostname : "directo"),
+    };
+    // text/plain evita el preflight CORS; sendBeacon sobrevive a la apertura de la nueva pestaña.
+    if (LEADS_URL) navigator.sendBeacon(LEADS_URL, new Blob([JSON.stringify(lead)], { type: "text/plain" }));
+    const saludo = `Hola Optexa 👋 Soy ${f.nombre}${f.negocio ? ` de ${f.negocio}` : ""}. Hice la evaluación de la web y obtuve ${totalScore}/${MAX_SCORE}.`;
+    window.open(waLink(`${saludo} ${isHighFriction ? "Me gustaría agendar un Diagnóstico Express." : "Me gustaría recibir recomendaciones para mi negocio."}`), "_blank", "noopener");
+    setSent(true);
+  };
+
   const handleStart = () => { setDirection(1); setStep(1); };
 
   const handleSelect = (score: number) => setSelected(score);
@@ -111,6 +134,7 @@ export default function SurveySection() {
     setAnswers([]);
     setSelected(null);
     setDirection(1);
+    setSent(false);
   };
 
   const slideVariants = {
@@ -276,78 +300,114 @@ export default function SurveySection() {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.35, ease: "easeInOut" }}
-                  className="flex flex-col gap-6 items-center text-center flex-1 justify-center"
+                  className="flex flex-col gap-5 items-center flex-1 justify-center"
                 >
-                  {isHighFriction ? (
-                    <>
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center shadow-lg shadow-[#F05941]/30">
-                        <CheckCircle size={38} className="text-white" />
+                  <div className="flex items-center gap-4 text-left">
+                    <div className={`w-14 h-14 shrink-0 rounded-full bg-gradient-to-br ${isHighFriction ? "from-[#F05941]" : "from-[#872341]"} to-[#BE3144] flex items-center justify-center`}>
+                      {isHighFriction ? <CheckCircle size={28} className="text-white" /> : <BookOpen size={28} className="text-white" />}
+                    </div>
+                    <div>
+                      <div className={`text-4xl font-black ${isHighFriction ? "text-[#F05941]" : "text-[#BE3144]"}`}>
+                        {totalScore}/{MAX_SCORE}
                       </div>
-                      <div>
-                        <div className="text-6xl font-black text-[#F05941] mb-2">
-                          {totalScore}/{MAX_SCORE}
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">
-                          Tu negocio tiene mucho por ganar
-                        </h3>
-                        <p className="text-white/55 leading-relaxed max-w-md mx-auto">
-                          Hay varias tareas que hoy te quitan tiempo y se pueden ordenar o
-                          simplificar. El siguiente paso es un Diagnóstico Express para
-                          conocer tu operación y priorizar las mejoras.
-                        </p>
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                        <a
-                          id="survey-wa-high-cta"
-                          href={waHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-primary text-base px-7 py-3.5"
-                        >
-                          <MessageCircle size={18} />
-                          Agendar Diagnóstico Express
+                      <h3 className="text-xl font-bold text-white">
+                        {isHighFriction ? "Tu negocio tiene mucho por ganar" : "Vas por buen camino"}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-white/70 leading-relaxed max-w-md">
+                    {isHighFriction
+                      ? "Hay varias tareas que hoy te quitan tiempo y se pueden ordenar o simplificar. El siguiente paso es un Diagnóstico Express para conocer tu operación y priorizar las mejoras."
+                      : "Tu negocio ya tiene una base de orden. Aun así, siempre hay oportunidades para conectar mejor la información y ahorrar tiempo."}
+                  </p>
+
+                  {sent ? (
+                    <div role="status" className="w-full max-w-md rounded-2xl border border-white/15 bg-white/5 p-6">
+                      <p className="text-white font-semibold mb-1">¡Gracias! Ya tenemos tus datos.</p>
+                      <p className="text-white/70 text-sm">
+                        Se abrió WhatsApp con tu mensaje listo; envíalo y te respondemos para acordar
+                        la reunión. Si no se abrió,{" "}
+                        <a href={waHref} target="_blank" rel="noopener noreferrer" className="underline text-white">
+                          toca aquí
                         </a>
-                        <button onClick={handleReset} className="btn-outline px-5 py-3.5 text-sm">
-                          <RotateCcw size={15} />
-                          Reiniciar
-                        </button>
-                      </div>
-                    </>
+                        .
+                      </p>
+                      <button onClick={handleReset} className="btn-outline px-5 py-2.5 text-sm mt-4">
+                        <RotateCcw size={15} />
+                        Reiniciar
+                      </button>
+                    </div>
                   ) : (
-                    <>
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#872341] to-[#BE3144] flex items-center justify-center shadow-lg">
-                        <BookOpen size={38} className="text-white" />
+                    <form onSubmit={handleLead} className="w-full max-w-md text-left grid gap-3">
+                      <p className="text-white font-semibold">
+                        Déjanos tus datos y te escribimos para {isHighFriction ? "agendar tu Diagnóstico Express" : "darte recomendaciones"}:
+                      </p>
+                      <label className="grid gap-1 text-sm text-white/80">
+                        Tu nombre
+                        <input name="nombre" required maxLength={80} autoComplete="given-name" className="lead-input" />
+                      </label>
+                      <label className="grid gap-1 text-sm text-white/80">
+                        WhatsApp
+                        <input name="whatsapp" type="tel" required inputMode="tel" pattern="[0-9+ ]{7,16}" placeholder="300 123 4567" autoComplete="tel" className="lead-input" />
+                      </label>
+                      <label className="grid gap-1 text-sm text-white/80">
+                        Nombre de tu negocio
+                        <input name="negocio" required maxLength={80} autoComplete="organization" className="lead-input" />
+                      </label>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        <label className="grid gap-1 text-sm text-white/80">
+                          ¿Qué vendes? <span className="sr-only">(opcional)</span>
+                          <select name="tipo" defaultValue="" className="lead-input">
+                            <option value="">Elige (opcional)</option>
+                            <option>Ropa y accesorios</option>
+                            <option>Comida</option>
+                            <option>Belleza</option>
+                            <option>Servicios</option>
+                            <option>Otro</option>
+                          </select>
+                        </label>
+                        <label className="grid gap-1 text-sm text-white/80">
+                          Ciudad <span className="sr-only">(opcional)</span>
+                          <input name="ciudad" maxLength={40} placeholder="Opcional" autoComplete="address-level2" className="lead-input" />
+                        </label>
                       </div>
-                      <div>
-                        <div className="text-6xl font-black text-[#BE3144] mb-2">
-                          {totalScore}/{MAX_SCORE}
+                      <fieldset className="text-sm text-white/80">
+                        <legend className="mb-1">Prefiero la reunión</legend>
+                        <div className="flex flex-wrap gap-2">
+                          {["Virtual", "Presencial", "Me da igual"].map((r) => (
+                            <label key={r} className="flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 cursor-pointer has-[:checked]:border-[#F05941] has-[:checked]:bg-[#F05941]/15">
+                              <input type="radio" name="reunion" value={r} defaultChecked={r === "Me da igual"} className="accent-[#F05941]" />
+                              {r}
+                            </label>
+                          ))}
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">
-                          Vas por buen camino
-                        </h3>
-                        <p className="text-white/55 leading-relaxed max-w-md mx-auto">
-                          Tu negocio ya tiene una base de orden. Aun así, siempre hay
-                          oportunidades para conectar mejor la información y ahorrar tiempo.
-                          Escríbenos y te contamos por dónde empezar.
-                        </p>
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                        <a
-                          id="survey-wa-low-cta"
-                          href={waHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-primary text-base px-7 py-3.5"
-                        >
-                          <MessageCircle size={18} />
-                          Hablar con Optexa
-                        </a>
-                        <button onClick={handleReset} className="btn-outline px-5 py-3.5 text-sm">
+                      </fieldset>
+                      {/* Campo trampa para bots: invisible para personas */}
+                      <input name="web" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                      <label className="flex items-start gap-2 text-xs text-white/70 leading-relaxed">
+                        <input type="checkbox" name="autoriza" required className="mt-0.5 accent-[#F05941]" />
+                        <span>
+                          Autorizo a Optexa a tratar mis datos para contactarme por WhatsApp, según la{" "}
+                          <Link href="/privacidad" target="_blank" className="underline text-white">
+                            Política de tratamiento de datos
+                          </Link>
+                          .
+                        </span>
+                      </label>
+                      <div className="flex flex-col sm:flex-row gap-3 mt-1">
+                        <button type="submit" id="survey-lead-submit" className="btn-primary text-base px-7 py-3.5">
+                          <Send size={18} />
+                          Enviar y abrir WhatsApp
+                        </button>
+                        <button type="button" onClick={handleReset} className="btn-outline px-5 py-3.5 text-sm">
                           <RotateCcw size={15} />
                           Reiniciar
                         </button>
                       </div>
-                    </>
+                      <a href={waHref} target="_blank" rel="noopener noreferrer" className="text-xs text-white/60 underline flex items-center gap-1">
+                        <MessageCircle size={13} /> Prefiero escribir por WhatsApp sin dejar datos
+                      </a>
+                    </form>
                   )}
                 </motion.div>
               )}
@@ -356,8 +416,7 @@ export default function SurveySection() {
         </motion.div>
 
         <p className="mt-6 text-center text-sm text-[#22092C]/70">
-          Tus respuestas no se guardan en esta página. Si nos escribes por WhatsApp, tratamos tus
-          datos según nuestra{" "}
+          Solo guardamos tus datos si los dejas al final y autorizas su uso. Los tratamos según nuestra{" "}
           <Link href="/privacidad" className="underline text-[#22092C] hover:text-[#F05941]">
             Política de tratamiento de datos
           </Link>
