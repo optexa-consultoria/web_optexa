@@ -36,10 +36,10 @@ export default function CasesSection() {
             Casos
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#22092C] leading-tight">
-            Proyectos reales,<br className="hidden md:block" />
+            Proyectos reales,{" "}<br className="hidden md:block" />
             contados con honestidad
           </h2>
-          <p className="mt-4 text-lg text-[#22092C]/55 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-lg text-[#22092C]/70 max-w-2xl mx-auto leading-relaxed">
             Mostramos solo trabajos reales y con autorización. Cuando cada proyecto cierre,
             publicaremos su antes y después.
           </p>
@@ -60,8 +60,8 @@ export default function CasesSection() {
                   <Icon size={22} className="text-white" />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-semibold text-[#22092C]/50 uppercase tracking-wider">{c.sector}</p>
-                  <p className="text-xs text-[#22092C]/40">{c.place}</p>
+                  <p className="text-xs font-semibold text-[#22092C]/70 uppercase tracking-wider">{c.sector}</p>
+                  <p className="text-xs text-[#22092C]/70">{c.place}</p>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-[#22092C] mb-4">{c.title}</h3>

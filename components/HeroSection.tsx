@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Play, Zap } from "lucide-react";
 
 const stagger = {
@@ -11,7 +12,7 @@ const stagger = {
   },
 };
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
@@ -24,6 +25,7 @@ export default function HeroSection() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let animationId: number;
     const particles: Array<{
@@ -108,7 +110,19 @@ export default function HeroSection() {
       {/* Particle canvas */}
       <canvas
         ref={canvasRef}
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full pointer-events-none"
+      />
+
+      {/* Isotipo de marca como marca de agua */}
+      <Image
+        src="/isotipo-crema.png"
+        alt=""
+        aria-hidden="true"
+        width={800}
+        height={800}
+        priority
+        className="absolute -right-40 -bottom-40 w-[560px] lg:w-[720px] opacity-[0.04] pointer-events-none select-none"
       />
 
       {/* Radial glow */}
@@ -137,7 +151,7 @@ export default function HeroSection() {
             {/* Headline */}
             <motion.h1
               variants={fadeUp}
-              className="text-5xl md:text-6xl xl:text-7xl font-black leading-[1.0] tracking-tight text-white"
+              className="text-[2.5rem] sm:text-5xl md:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight text-white"
             >
               Optimizamos{" "}
               <span className="text-gradient">procesos</span>,<br />
@@ -159,7 +173,7 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <motion.div
               variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-4 mt-2"
+              className="flex flex-col sm:flex-row gap-4 mt-2 [&>a]:justify-center"
             >
               <a
                 href="#diagnostico"
@@ -178,7 +192,7 @@ export default function HeroSection() {
             {/* Stats row */}
             <motion.div
               variants={fadeUp}
-              className="flex gap-8 mt-4 pt-6 border-t border-white/10"
+              className="grid grid-cols-3 gap-4 sm:gap-8 mt-4 pt-6 border-t border-white/10 sm:flex"
             >
               {[
                 { value: "Primero", label: "entendemos tu negocio" },
@@ -186,10 +200,10 @@ export default function HeroSection() {
                 { value: "Contigo", label: "acompañamiento real" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-0.5">
-                  <span className="text-2xl font-black text-[#F05941]">
+                  <span className="text-lg sm:text-2xl font-black text-[#F05941]">
                     {stat.value}
                   </span>
-                  <span className="text-xs text-white/45 leading-tight">
+                  <span className="text-xs text-white/60 leading-tight">
                     {stat.label}
                   </span>
                 </div>
@@ -208,12 +222,10 @@ export default function HeroSection() {
               {/* Main card */}
               <div className="glass-card rounded-3xl p-8 border border-white/10 shadow-2xl">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center">
-                    <Zap size={20} className="text-white" />
-                  </div>
+                  <Image src="/isotipo.png" alt="" aria-hidden="true" width={40} height={40} className="w-10 h-10" />
                   <div>
                     <p className="text-white font-bold text-sm">Método Optexa</p>
-                    <p className="text-white/40 text-xs">Engineer the flow</p>
+                    <p className="text-white/60 text-xs">Engineer the flow</p>
                   </div>
                 </div>
 
@@ -272,9 +284,9 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
-        <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
+        <span className="text-white/60 text-xs tracking-widest uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}

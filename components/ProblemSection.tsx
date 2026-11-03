@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { FolderOpen, Link2, MessageCircle, BarChart2, Repeat, Package } from "lucide-react";
 
 const painPoints = [
@@ -41,7 +41,7 @@ const containerVariants = {
   show: { transition: { staggerChildren: 0.12 } },
 };
 
-const cardVariants: any = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
@@ -62,10 +62,10 @@ export default function ProblemSection() {
             ¿Te pasa esto?
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#22092C] leading-tight">
-            Tu negocio crece, pero<br className="hidden md:block" />
+            Tu negocio crece, pero{" "}<br className="hidden md:block" />
             el orden no lo acompaña
           </h2>
-          <p className="mt-4 text-lg text-[#22092C]/55 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-lg text-[#22092C]/70 max-w-2xl mx-auto leading-relaxed">
             Son situaciones comunes en emprendimientos y pequeños negocios que venden
             por redes sociales. Todas se pueden mejorar, y no siempre hace falta
             invertir en tecnología costosa.

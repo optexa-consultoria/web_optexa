@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://web-optexa.vercel.app"),
   title: "Optexa Consultoría | Optimizamos procesos, transformamos negocios",
   description:
     "Consultoría en optimización de procesos y transformación digital para emprendedores y pequeños negocios del Cauca. Organizamos y conectamos la información de tus productos, clientes y ventas con herramientas accesibles.",
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={inter.variable}>
       <body className={inter.className}>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <Analytics />
       </body>
     </html>

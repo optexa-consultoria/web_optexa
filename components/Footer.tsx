@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Zap, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { EMAIL, CITY, waLink } from "@/lib/site";
@@ -39,15 +40,12 @@ export default function Footer() {
           {/* Brand column */}
           <div className="flex flex-col gap-4">
             <a href="#" className="flex items-center gap-2 w-fit">
-              <Image src="/logo-optexa.png" alt="Optexa" width={480} height={122} className="h-9 w-auto" />
+              <Image src="/logo-optexa-lema.png" alt="Optexa, Engineer the flow" width={480} height={132} className="h-12 w-auto" />
             </a>
-            <p className="text-white/35 text-sm leading-relaxed max-w-xs">
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Optimizamos procesos, transformamos negocios. Consultoría en
               optimización de procesos y transformación digital para emprendedores
               y pequeños negocios.
-            </p>
-            <p className="text-[#F05941]/70 text-xs font-semibold tracking-widest uppercase italic mt-2">
-              Engineer the flow
             </p>
           </div>
 
@@ -62,7 +60,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-white/35 hover:text-white text-sm transition-colors duration-200 flex items-center gap-1.5 group"
+                      className="text-white/60 hover:text-white text-sm transition-colors duration-200 flex items-center gap-1.5 group"
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
@@ -80,9 +78,13 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/6 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/20 text-xs">
+          <p className="text-white/60 text-xs">
             © {new Date().getFullYear()} Optexa Consultoría. Todos los derechos reservados.
           </p>
+          <nav aria-label="Legal" className="flex gap-6 text-xs">
+            <Link href="/privacidad" className="text-white/60 hover:text-white">Tratamiento de datos</Link>
+            <Link href="/terminos" className="text-white/60 hover:text-white">Términos de uso</Link>
+          </nav>
         </div>
       </div>
     </footer>

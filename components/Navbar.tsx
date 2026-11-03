@@ -39,7 +39,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
+        <a href="#inicio" aria-label="Optexa, ir al inicio" className="flex items-center gap-2 group">
           <Image src="/logo-optexa.png" alt="Optexa" width={480} height={122} className="h-8 w-auto" priority />
         </a>
 
@@ -68,8 +68,10 @@ export default function Navbar() {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-          aria-label="Toggle menu"
+          className="md:hidden text-white p-2.5 rounded-lg hover:bg-white/10 transition-colors"
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuOpen}
+          aria-controls="menu-movil"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -83,6 +85,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
+            id="menu-movil"
             className="md:hidden glass border-t border-white/10 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-5">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Ear, Search, PenTool, Wrench, RefreshCw } from "lucide-react";
 
@@ -13,8 +14,16 @@ const stages = [
 
 export default function MethodSection() {
   return (
-    <section id="metodo" className="bg-[#22092C] section-padding">
-      <div className="max-w-7xl mx-auto">
+    <section id="metodo" className="relative overflow-hidden bg-[#22092C] section-padding">
+      <Image
+        src="/isotipo-crema.png"
+        alt=""
+        aria-hidden="true"
+        width={800}
+        height={800}
+        className="absolute -left-48 top-10 w-[520px] opacity-[0.03] pointer-events-none select-none"
+      />
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +35,7 @@ export default function MethodSection() {
             Método Optexa
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
-            Cinco etapas para<br className="hidden md:block" />
+            Cinco etapas para{" "}<br className="hidden md:block" />
             <span className="text-gradient">transformar tu negocio</span>
           </h2>
           <p className="mt-4 text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">

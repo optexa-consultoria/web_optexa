@@ -156,7 +156,7 @@ export default function SolutionSection() {
             Servicios
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
-            Soluciones según la etapa<br className="hidden md:block" />
+            Soluciones según la etapa{" "}<br className="hidden md:block" />
             de <span className="text-gradient">tu negocio</span>
           </h2>
           <p className="mt-4 text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">

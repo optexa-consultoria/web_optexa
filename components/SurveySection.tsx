@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import { waLink } from "@/lib/site";
 import { ChevronRight, ChevronLeft, CheckCircle, BookOpen, MessageCircle, RotateCcw } from "lucide-react";
 
@@ -131,10 +133,10 @@ export default function SurveySection() {
             Evaluación gratuita
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-[#22092C] leading-tight">
-            ¿Qué tan organizado<br className="hidden md:block" />
+            ¿Qué tan organizado{" "}<br className="hidden md:block" />
             está tu negocio?
           </h2>
-          <p className="mt-4 text-lg text-[#22092C]/55 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-4 text-lg text-[#22092C]/70 max-w-xl mx-auto leading-relaxed">
             6 preguntas, 3 minutos. Una mirada rápida y honesta a cómo funciona hoy tu negocio.
           </p>
         </motion.div>
@@ -170,9 +172,7 @@ export default function SurveySection() {
                   transition={{ duration: 0.35, ease: "easeInOut" }}
                   className="flex flex-col gap-6 items-center text-center flex-1 justify-center"
                 >
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#F05941] to-[#BE3144] flex items-center justify-center shadow-lg shadow-[#F05941]/30">
-                    <BookOpen size={36} className="text-white" />
-                  </div>
+                  <Image src="/isotipo.png" alt="" aria-hidden="true" width={80} height={80} className="w-20 h-20" />
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-3">
                       Evaluación de orden y control
@@ -209,7 +209,7 @@ export default function SurveySection() {
                     <span className="text-[#F05941] text-sm font-semibold">
                       Pregunta {step} de {questions.length}
                     </span>
-                    <span className="text-white/30 text-sm">{Math.round(progress)}% completado</span>
+                    <span className="text-white/60 text-sm">{Math.round(progress)}% completado</span>
                   </div>
 
                   <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
@@ -222,6 +222,7 @@ export default function SurveySection() {
                         key={i}
                         id={`survey-q${step}-opt${i}`}
                         onClick={() => handleSelect(opt.score)}
+                        aria-pressed={selected === opt.score}
                         className={`text-left px-5 py-4 rounded-xl border transition-all duration-200 text-sm leading-relaxed ${
                           selected === opt.score
                             ? "bg-[#F05941]/15 border-[#F05941] text-white"
@@ -353,6 +354,15 @@ export default function SurveySection() {
             </AnimatePresence>
           </div>
         </motion.div>
+
+        <p className="mt-6 text-center text-sm text-[#22092C]/70">
+          Tus respuestas no se guardan en esta página. Si nos escribes por WhatsApp, tratamos tus
+          datos según nuestra{" "}
+          <Link href="/privacidad" className="underline text-[#22092C] hover:text-[#F05941]">
+            Política de tratamiento de datos
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );
