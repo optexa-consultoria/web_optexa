@@ -22,7 +22,7 @@ const footerLinks = {
   Contacto: [
     { label: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
     { label: CITY, href: "#", icon: MapPin },
-    { label: "WhatsApp +57 318 381 7518", href: waLink("Hola Optexa, quiero más información."), icon: Zap },
+    { label: "WhatsApp +57 312 725 2204", href: waLink("Hola Optexa, quiero más información."), icon: Zap },
   ],
 };
 
